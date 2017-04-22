@@ -1,0 +1,32 @@
+<project name="My Project" default="jar" basedir="."> <!-- always start with this parameter -->
+
+<!-- Sequence sample
+1)import
+2)clean - delete files that has .class inside
+3)compile - generate the class files from the src, depends on clean
+4)package - will create package out of the classes, depends on compile
+jar is the package that machine can understand.
+-->
+
+<description>Simple example of build file</description>
+<property name="bin" value=".\bin"/>
+<property name="src" value=".\src"/>
+<property name="jar" value=".\jar"/>
+
+<target name="clean">
+	<delete dir="${bin}" />
+	<delete dir="${jar}" />
+</target>
+
+
+<target name="compile" depends="clean">
+	<mkdir dir="${bin}/classes" />
+	<javac destdir="${bin}/classes" srcdir="${src}" />
+</target>
+
+<target name="jar" depends="compile">
+	<mkdir dir="${jar}"/>
+	<jar basedir="${bin}" destfile="${jar}/anyname.jar"></jar>
+</target>
+
+</project>
